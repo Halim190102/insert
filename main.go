@@ -14,6 +14,10 @@ import (
 func main() {
 
 	cfg := config.LoadAllConfig()
+
+    log.Printf("SSH_HOST=%q", cfg.SSHHost)
+    log.Printf("SSH_PORT=%q", cfg.SSHPort)
+    log.Printf("SSH_USER=%q", cfg.SSHUser)
 	db := config.ConnectOracle(cfg)
 
     app := fiber.New(fiber.Config{

@@ -35,6 +35,7 @@ func LoadAllConfig() *ENVConfig{
 		SSHUser: os.Getenv("SSH_USER"),
 		SSHPass: os.Getenv("SSH_PASS"),
 	}
+	
 
 }
 
