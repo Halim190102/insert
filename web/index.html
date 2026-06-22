@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oracle Excel Importer</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <h1>📊 Oracle Excel Importer</h1>
+        <p>
+          Upload Excel → Preview → Pilih Mode → Mapping Kolom → Import ke Oracle
+        </p>
+      </div>
+
+      <!-- Step 1: Upload & Preview -->
+      <div class="card">
+        <h2>Step 1 — Upload & Preview Excel</h2>
+
+        <div class="upload-row">
+          <input type="file" id="excelFile" accept=".xlsx,.xls" />
+          <select id="sheetSelect" disabled>
+            <option value="">— Pilih Sheet —</option>
+          </select>
+          <button id="btnPreview" type="button" disabled>🔍 Preview Excel</button>
+        </div>
+
+        <div id="previewInfo" class="preview-info"></div>
+
+        <div class="table-wrapper" id="previewWrapper" style="display: none">
+          <div id="previewTable"></div>
+        </div>
+      </div>
+
+      <!-- Step 2: Mode -->
+      <div class="card" id="stepMode" style="display: none">
+        <h2>Step 2 — Pilih Mode Import</h2>
+
+        <div class="mode-tabs">
+          <button
+            class="tab-btn active"
+            id="tabCreate"
+            onclick="setMode('create')"
+          >
+            ✨ Create Table Baru
+          </button>
+          <button class="tab-btn" id="tabInsert" onclick="setMode('insert')">
+            📥 Insert ke Table Existing
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3 Create: Nama Table + Pilih Kolom -->
+      <div class="card" id="stepCreate" style="display: none">
+        <h2>Step 3 — Create Table Baru</h2>
+
+        <div class="form-group">
+          <label>Nama Table Oracle (baru)</label>
+          <input
+            type="text"
+            id="newTableName"
+            placeholder="contoh: TEMP_ORDER_2025"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Pilih Kolom dari Excel yang akan dijadikan kolom table:</label>
+          <div class="col-actions">
+            <button type="button" class="btn-sm" onclick="selectAllCols(true)">
+              ✔ Pilih Semua
+            </button>
+            <button
+              type="button"
+              class="btn-sm btn-outline"
+              onclick="selectAllCols(false)"
+            >
+              ✖ Batal Semua
+            </button>
+          </div>
+          <div id="createColList" class="col-checkbox-list"></div>
+        </div>
+
+        <div class="selected-preview" id="createSelectedInfo"></div>
+      </div>
+
+      <!-- Step 3 Insert: Pilih Table + Mapping Kolom -->
+      <div class="card" id="stepInsert" style="display: none">
+        <h2>Step 3 — Insert ke Table Existing</h2>
+
+        <div class="form-group">
+          <label>Pilih Table Oracle</label>
+          <select id="tableSelect">
+            <option value="">— Loading tables... —</option>
+          </select>
+        </div>
+
+        <div id="mappingSection" style="display: none">
+          <div class="form-group">
+            <label>Mapping Kolom Excel → Kolom Oracle</label>
+            <p class="hint">
+              Kosongkan / pilih "— Skip —" untuk kolom yang tidak ingin
+              di-insert.
+            </p>
+            <div id="mappingContainer"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Execute -->
+      <div class="card" id="stepExecute" style="display: none">
+        <h2>Step 4 — Execute Import</h2>
+
+        <button id="btnExecute" type="button" onclick="executeImport()">
+          🚀 Execute Import
+        </button>
+
+        <div id="resultBox" class="result-box" style="display: none"></div>
+      </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+  </body>
+</html>
