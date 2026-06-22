@@ -25,15 +25,15 @@ func LoadAllConfig() *ENVConfig{
 		log.Println("⚠️  .env not found, using system environment variables")
 	}
 	return &ENVConfig{
-		DBHost: getEnv("DB_HOST", "10.6.11.157"),
-		DBPort: getEnv("DB_PORT", "1521"),
-		DBUser: getEnv("DB_USER", "SCONE_B2B"),
-		DBPass: getEnv("DB_PASS", ""),
-		DBService: getEnv("DB_SERVICE", "SCONE_B2B"),
-		SSHHost: getEnv("SSH_HOST", "10.62.169.91"),
-		SSHPort: getEnv("SSH_PORT", "22"),
-		SSHUser: getEnv("SSH_USER", "neuron_indratristia"),
-		SSHPass: getEnv("SSH_PASS", ""),
+		DBHost: os.Getenv("DB_HOST"),
+		DBPort: os.Getenv("DB_PORT"),
+		DBUser: os.Getenv("DB_USER"),
+		DBPass: os.Getenv("DB_PASS"),
+		DBService: os.Getenv("DB_SERVICE"),
+		SSHHost: os.Getenv("SSH_HOST"),
+		SSHPort: os.Getenv("SSH_PORT"),
+		SSHUser: os.Getenv("SSH_USER"),
+		SSHPass: os.Getenv("SSH_PASS"),
 	}
 
 }
